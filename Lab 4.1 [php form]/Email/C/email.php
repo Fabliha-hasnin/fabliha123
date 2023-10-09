@@ -1,0 +1,25 @@
+<?php
+
+$email = $_REQUEST['email'];
+
+   // echo $email;
+
+?>
+
+<html lang="en">
+<head>
+    <title>This is email file</title>
+</head>
+<body>
+    <form method="post" action="Email.php" enctype="">
+        <fieldset style="width:20%;">
+            <legend> Email </legend>
+            <input type="email" name="email" value="<?php {echo $email;} ?>" /> <input type = "button" value="i" title="abc@gmail.com"<br>
+            <hr></hr>
+            <input type="submit" name="" value="submit" /><br>
+          
+        </fieldset>
+    
+    </form>
+</body>
+</html>
