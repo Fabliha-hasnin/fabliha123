@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['flag'])){
-        header('location: login.html');
+        header('location: changepass.html');
     }
 
 ?>
@@ -12,6 +12,6 @@
     <title>Home</title>
 </head>
 <body>
-        <h1> Welcome Home </h1>
+        <h1> change successfull ! </h1>
 </body>
 </html>
