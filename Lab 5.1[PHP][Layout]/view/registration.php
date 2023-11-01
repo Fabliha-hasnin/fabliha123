@@ -12,7 +12,7 @@
         <td >
         <fieldset style="width.30%">
         <legend>Registration</legend>
-    <form method="" action=" "enctype="">
+    <form method="" action=""enctype="">
        
        Name: <input type="text" name="" value="" /> <br>
        <hr></hr>
