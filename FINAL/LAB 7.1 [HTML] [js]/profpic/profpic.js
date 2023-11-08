@@ -5,6 +5,10 @@ function getpic()
 
     if (!id)
     {
+        alert("empty id");
+    }
+    else(!pic)
+    {
         alert("empty file");
     }
 }
