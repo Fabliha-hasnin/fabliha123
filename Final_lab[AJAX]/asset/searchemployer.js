@@ -2,7 +2,7 @@ function ajax() {
     let username = document.getElementById('username').value;
     let xhttp = new XMLHttpRequest();
 
-    xhttp.open('POST', '../controller/index.php', true);
+    xhttp.open('POST', '../controller/searchemployer.php', true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {

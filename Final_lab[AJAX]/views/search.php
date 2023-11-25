@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Index</title>
-    <script src="../asset/script.js"></script>
+    <script src="../asset/serachemployer.js"></script>
     <style>  
         td { vertical-align: top; }
         .center-fieldset {
@@ -20,6 +20,7 @@
                     <b>Username:</b> <input type="text" name="username" id="username" value="" /><br><br>
                     <hr>
                     <input type="button" name="search" value="Search" onclick="ajax()" />
+                    <a href="./adminhome.php"> Back </a>
             </td>
         </tr>
     </table>
