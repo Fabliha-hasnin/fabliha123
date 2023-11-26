@@ -9,15 +9,10 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    <script src = "../event(js)/addmembercheck.js"></script>
     <style>  
     td { vertical-align:top;}
    </style>
-</head>
-<body>
-    <table>
-    <html lang="en">
-<head>
-    <title> Menu </title>
 </head>
 <body>
 <table border = "1" align="center" width="70%" height="100%">
@@ -51,18 +46,18 @@
         
             <pre><p>
 
-            <form action="../controller/addMemberCheck.php" method="POST">
+            <form action="../controller/addMemberCheck.php" method="POST" onsubmit="return getmember()">
                         
-            <b>Username:    <select name="username" id="">   
+            <b>Username:    <select name="username" id="username">   
                             <option>Select user</option>
                             <?php for ($i=0;$i<count($developerInfo);$i++){?>
                             <option value="<?php echo $developerInfo[$i]['username']?>"><?php echo $developerInfo[$i]['username']?></option>  
                             <?php } ?>  
                             </select>
                             <br>
-            <b> Role:       <input type="radio" name="Role" value="Quality Assurance" />Quality Assurance
-                            <input type="radio" name="Role" value="Sofware Manager" /> Sofware Manager
-                            <input type="radio" name="Role" value="Software Aechitect" /> Software Aechitect
+            <b> Role:       <input type="radio" name="Role" id="QA" value="Quality Assurance" />Quality Assurance
+                            <input type="radio" name="Role" id="SM" value="Sofware Manager" /> Sofware Manager
+                            <input type="radio" name="Role" id="SA" value="Software Aechitect" /> Software Aechitect
                             <br><br>
                             
                         
@@ -85,8 +80,6 @@
     <tr align="center">
         <td colspan="2"> Copyright c 2023 </td>
     </tr>
-</body>
-</html>
     </table>
 </body>
 </html>

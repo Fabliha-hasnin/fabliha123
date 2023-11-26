@@ -1,11 +1,13 @@
 <?php
     include('../model/operationmodel.php');
 
+    $developerInfo = getDeveloperInfo();
     $memberInfo = getAllTeamMember();
 ?>
 <html lang="en">
 <head>
     <title>Document</title>
+    <script src = "../event(js)/removemembercheck.js"></script>
     <style>  
     td { vertical-align:top;}
    </style>
@@ -49,13 +51,17 @@
                             <?php } ?>  
                             </select>
                             <br>
-            <b> Password    :</b>  <input type="password" name="name" value="" /> <br> <br>
-            <input type="reset" name="" value="cancel" /> <input type="submit" name="" value="Remove" /> 
+            <b> Password    :</b>  <input type="password" id ="password" name="password" value="" /> <br> <br>
+            <input type="reset" name="" value="cancel" /> <input type="submit" name="" value="Remove" onclick="remove()" /> 
             <p></pre>
 
             </form>
-        </td>
- 
+        
+        <h4> <u> Added Members </u></h4>
+           
+        <input type="button" name="click" value="Show members" onclick="showMembers()"/><br><br>
+        <div id="members"></div>
+            </td>
     </tr>
     <tr align="center">
         <td colspan="2"> Copyright c 2023 </td>

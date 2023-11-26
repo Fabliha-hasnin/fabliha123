@@ -74,9 +74,6 @@ function updateuserinfo($name,$email,$gender,$dob,$username) // edit prof
             return false;
         }
     }
-    
-
-    
 
 }
 ?> 

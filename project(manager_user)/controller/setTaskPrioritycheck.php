@@ -2,24 +2,29 @@
 session_start();
 require_once('../model/operationmodel.php');
 
-// $projects = displayAllProjectInfo();
-// $projectNames = getProjectName();
-// $projectTypes = getProjectType(); // Fetch project types
-
 if (isset($_POST['insert_project'])) {
-    $projectName = $_POST['project_name'];
-    $projectType = $_POST['project_type'];
     $priorityTask = $_POST['priority_task'];
     $deadline = $_POST['deadline'];
 
-    $inserted = insertTaskPriority($projectName, $projectType, $priorityTask, $deadline);
+    $alph = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    if ($inserted) {
-        echo "Task priority and deadline inserted successfully";
+    if ($priorityTask == '' || $deadline == '') {
+        echo "Null value! Fill all the fields";
+    } else if (strpbrk($priorityTask, $alph) === false) {
+        echo "Task priority should contain only alphabetic characters with a mix of upper and lower case";
     } else {
-        echo "Error: Failed to insert task priority";
+        $projectName = $_POST['project_name'];
+        $projectType = $_POST['project_type'];
+
+        $inserted = insertTaskPriority($projectName, $projectType, $priorityTask, $deadline);
+
+        if ($inserted) {
+            echo "Task priority and deadline inserted successfully";
+        } else {
+            echo "Error: Failed to insert task priority";
+        }
     }
 }
-
 ?>
+
 

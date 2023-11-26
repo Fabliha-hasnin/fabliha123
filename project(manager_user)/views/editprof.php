@@ -9,6 +9,7 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    <script src = "../event(js)/editprofcheck.js"></script>
     <style>  
     td { vertical-align:top;}
     fieldset {
@@ -42,20 +43,20 @@
 
     
      <td align ="center" width="70%" style="background-color: #F5F5F5;">
-     <form method="POST" action="../controller/editprofcheck.php">
+     <form method="POST" action="../controller/editprofcheck.php" onsubmit="return edit() ">
      <?php
             for ($i = 0; $i < count($user); $i++) {
                 if ($user[$i]['username'] == $userSession) {
                     ?>
                     <br>
-                    Name: <input type="text" name="name" value="<?= $user[$i]['name']; ?>"><hr>
-                    Email: <input type="text" name="email" value="<?= $user[$i]['email']; ?>"><hr>
+                    Name: <input type="text" name="name" id="name" value="<?= $user[$i]['name']; ?>"><hr>
+                    Email: <input type="text" name="email" id="email" value="<?= $user[$i]['email']; ?>"><hr>
                     Gender: 
-                    <input type="radio" name="gender" value="Male" <?= ($user[$i]['gender'] === 'Male') ? 'checked' : ''; ?>>Male
-                    <input type="radio" name="gender" value="Female" <?= ($user[$i]['gender'] === 'Female') ? 'checked' : ''; ?>>Female
-                    <input type="radio" name="gender" value="Other" <?= ($user[$i]['gender'] === 'Other') ? 'checked' : ''; ?>>Other
+                    <input type="radio" name="gender" id="gender" value="Male" <?= ($user[$i]['gender'] === 'Male') ? 'checked' : ''; ?>>Male
+                    <input type="radio" name="gender" id="gender" value="Female" <?= ($user[$i]['gender'] === 'Female') ? 'checked' : ''; ?>>Female
+                    <input type="radio" name="gender" id="gender" value="Other" <?= ($user[$i]['gender'] === 'Other') ? 'checked' : ''; ?>>Other
                     <hr>
-                    Date of Birth: <input type="date" name="dob" value="<?= $user[$i]['dob']; ?>"><hr>
+                    Date of Birth: <input type="date" name="dob" id="dob" value="<?= $user[$i]['dob']; ?>"><hr>
                     <input type="submit" value="Submit" />
             <?php
                 }

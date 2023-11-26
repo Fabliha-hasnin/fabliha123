@@ -152,5 +152,19 @@ function updateDeadline($projectName , $newdeadline )
         }
     }
 
+    function getUserToRemove($username)
+{
+    $con = getConnection();
+    $sql = "SELECT * FROM userinfo WHERE username = '$username'";
+    $result = mysqli_query($con, $sql);
+
+    if ($result) {
+        $user = mysqli_fetch_assoc($result);
+        return $user;
+    } else {
+        return false;
+    }
+}
+
  ?>  
 

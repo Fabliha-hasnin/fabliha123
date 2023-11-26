@@ -67,7 +67,7 @@
 
                     <b>Set Priority:</b> <input type="text" name="priority_task" id="priority_task"  /><br><br>
                     <b>Set Deadline:</b> <input type="date" name="deadline" id="deadline"  /><br><br>
-                    <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" onclick="getpriority()" /><br><br>
+                    <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" /><br><br>
                 </td>
             </tr>
             <tr align="center">
