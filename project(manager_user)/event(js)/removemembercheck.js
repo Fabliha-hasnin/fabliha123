@@ -16,6 +16,7 @@ function remove() {
 
 function showMembers() {
     let xhttp = new XMLHttpRequest();
+    
     xhttp.open("GET", "../controller/showaddedmembers.php", true);
 
     xhttp.onreadystatechange = function () {
