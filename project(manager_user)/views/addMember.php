@@ -44,25 +44,35 @@
         <center> <h2> Add Member </h2> </center> 
         </div>
         
-            <pre><p>
+            <!-- <p> -->
 
-            <form action="../controller/addMemberCheck.php" method="POST" onsubmit="return getmember()">
-                        
-            <b>Username:    <select name="username" id="username">   
+            
+           <b> Users: <div id='users' onchange="getDeveloper(this.value)"></div><br>
+           <button onclick="previous()">Previous</button>
+           <button onclick="next()">Next</button><br><br>
+           <hr>
+
+           <form action="../controller/addMemberCheck.php" method="POST" onsubmit="return getmember()">           
+            <b>Username:    <select name="username" id="username"> 
                             <option>Select user</option>
                             <?php for ($i=0;$i<count($developerInfo);$i++){?>
                             <option value="<?php echo $developerInfo[$i]['username']?>"><?php echo $developerInfo[$i]['username']?></option>  
                             <?php } ?>  
                             </select>
+                            <div id="h1"> </div>
                             <br>
-            <b> Role:       <input type="radio" name="Role" id="QA" value="Quality Assurance" />Quality Assurance
-                            <input type="radio" name="Role" id="SM" value="Sofware Manager" /> Sofware Manager
-                            <input type="radio" name="Role" id="SA" value="Software Aechitect" /> Software Aechitect
+            <b> Role:       
+                <input type="radio" name="Role" id="QA" value="Quality Assurance" />Quality Assurance
+                <input type="radio" name="Role" id="SM" value="Sofware Manager" /> Sofware Manager
+                <input type="radio" name="Role" id="SA" value="Software Aechitect" /> Software Aechitect
+                <br><br>
+                <div id="h2"style="color:red" ></div>
                             <br><br>
-                            
+              
+            
                         
             <input type="reset" name="reset" value="cancel" /> <input type="submit" name="" value="submit" /> 
-            <p></pre>
+            <!-- <p> -->
             </form>
             <hr>
             

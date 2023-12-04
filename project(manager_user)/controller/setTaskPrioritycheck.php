@@ -2,6 +2,13 @@
 session_start();
 require_once('../model/operationmodel.php');
 
+if (isset($_GET['q'])) {
+    $q = $_GET['q'];
+    $suggestions = getSuggestions($q);
+    $suggestionsJson = json_encode($suggestions);
+    echo $suggestionsJson;
+}
+
 if (isset($_POST['insert_project'])) {
     $priorityTask = $_POST['priority_task'];
     $deadline = $_POST['deadline'];
@@ -26,5 +33,6 @@ if (isset($_POST['insert_project'])) {
     }
 }
 ?>
+
 
 

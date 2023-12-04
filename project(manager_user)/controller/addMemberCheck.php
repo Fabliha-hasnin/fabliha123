@@ -2,18 +2,14 @@
     session_start();
     require_once('../model/operationmodel.php');
 
-    $role =$_REQUEST['Role'];
-    $username=$_REQUEST['username'];
+    $role = $_POST['Role'];
+    $username = $_POST['username'];
 
     $result = addMember($username, $role);
 
-    if ($result)
-    {
+    if ($result) {
         header('Location: ../views/addMember.php');
+    } else {
+        echo "Adding member unsuccessful";
     }
-    else{
-
-        echo "adding member unsecessful";
-    }
-
 ?>

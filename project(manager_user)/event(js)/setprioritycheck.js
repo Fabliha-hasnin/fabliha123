@@ -17,3 +17,23 @@ function getpriority() {
     }
     
 }
+
+function showHint(str) {
+    if (str.length == 0) { 
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    }
+
+    const xhttp = new XMLHttpRequest();
+    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            const suggestions = JSON.parse(this.responseText);
+            document.getElementById("txtHint").innerHTML = suggestions.join(', ');
+        }
+    };
+
+    xhttp.open("GET", "../controller/setTaskPrioritycheck.php?q=" + str, true);
+    xhttp.send();
+}
+

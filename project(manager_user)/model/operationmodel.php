@@ -166,5 +166,33 @@ function updateDeadline($projectName , $newdeadline )
     }
 }
 
+function getSuggestions($q)
+{
+    $con = getConnection();
+    $sql = "SELECT q FROM suggestion WHERE q LIKE '$q%'";
+    $result = mysqli_query($con, $sql);
+    $suggestions = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $suggestions[] = $row['q'];
+    }
+
+    return $suggestions;
+}
+
+function getDevelopers(){
+
+    $con = getConnection();
+    $sql = "SELECT * FROM developers";
+    $result = mysqli_query($con, $sql);
+    $users = [];
+    
+    while($user = mysqli_fetch_assoc($result)){
+        array_push($users, $user);
+    }
+    return $users;
+}
+
+
  ?>  
 

@@ -65,7 +65,7 @@
                         <?php endforeach; ?>
                     </select>
 
-                    <b>Set Priority:</b> <input type="text" name="priority_task" id="priority_task"  /><br><br>
+                    <b>Set Priority:</b> <input type="text"  name="priority_task" id="priority_task" onkeyup="showHint(this.value)"><p>Suggestions: <span id="txtHint"></span></p> <br><br>
                     <b>Set Deadline:</b> <input type="date" name="deadline" id="deadline"  /><br><br>
                     <input type="reset" name="" value="Reset" /> <input type="submit" name="insert_project" value="Submit" /><br><br>
                 </td>
