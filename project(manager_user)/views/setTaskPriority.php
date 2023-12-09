@@ -52,14 +52,14 @@
                         ?> <hr>
 
                     <select name="project_name" id="project_name">
-                        <option value="">Select Project Name</option>
+                        <option value="" disabled selected>Select Project Name</option>
                         <?php foreach ($projectNames as $projectName) : ?>
                             <option value="<?= $projectName ?>"><?= $projectName ?></option>
                         <?php endforeach; ?>
                     </select>
 
                     <select name="project_type" id="project_type">
-                    <option value="">Select Project Type</option>
+                    <option value="" disabled selected>Select Project Type</option>
                     <?php foreach ($projectTypes as $projectType) : ?>
                         <option value="<?= $projectType ?>"><?= $projectType ?></option>
                         <?php endforeach; ?>

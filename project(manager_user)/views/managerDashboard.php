@@ -49,6 +49,7 @@
 
      <td width="70%">
        <!-- <center> <img src ="me.jpg" width = "100px" height="100px"> <br> </center>   -->
+       <div id="newMember"></div>
     </td > 
 
     </tr>

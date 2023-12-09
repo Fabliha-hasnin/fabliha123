@@ -46,20 +46,20 @@
         
             <!-- <p> -->
 
-            
-           <b> Users: <div id='users' onchange="getDeveloper(this.value)"></div><br>
-           <button onclick="previous()">Previous</button>
-           <button onclick="next()">Next</button><br><br>
-           <hr>
+            <b> Users: <div id='users'></div><br>
+           <!-- <b> Users: <div id='users' onchange="getDeveloper(this.value)"></div><br>
+           <button onclick="show()">Show</button><br><br>
+           <hr> -->
+           <script src="../event(js)/addmembercheck.js"></script>
 
            <form action="../controller/addMemberCheck.php" method="POST" onsubmit="return getmember()">           
-            <b>Username:    <select name="username" id="username"> 
-                            <option>Select user</option>
+            <b>Username:    <select name="username" id="username" onblur="return getUser()"> 
+                            <option disabled selected>Select user</option>
                             <?php for ($i=0;$i<count($developerInfo);$i++){?>
                             <option value="<?php echo $developerInfo[$i]['username']?>"><?php echo $developerInfo[$i]['username']?></option>  
                             <?php } ?>  
                             </select>
-                            <div id="h1"> </div>
+                            <div id="h1"style="color:red" ></div>
                             <br>
             <b> Role:       
                 <input type="radio" name="Role" id="QA" value="Quality Assurance" />Quality Assurance

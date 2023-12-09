@@ -1,7 +1,7 @@
 <?php
 require_once('../model/operationmodel.php');
 //print_r(getAllTaskInfo());
-$projectTaskInfo = getAllTaskInfo();
+//$projectTaskInfo = getAllTaskInfo();
 
 ?>
 <!DOCTYPE html>
@@ -9,12 +9,13 @@ $projectTaskInfo = getAllTaskInfo();
 <head>
     <meta charset="UTF-8">
     <title>Collaborative Task Management</title>
+    <script src="../event(js)/viewproject.js"></script>
     <style>
         td { vertical-align: top; }
     </style>
 </head>
 <body>
-    <form method="POST" action="../controller/viewprojectscheck.php">
+    <!-- <form method="POST" action="../controller/viewproject.php" onsubmit="search(); return false;"> -->
         <table border="1" align="center" width="70%" height="100%">
         <tr> <th colspan="2"> <bold><h1> Collaborative task management </h1></bold> <a href="../controller/logout.php"> Logout </a></th></tr>
             <tr>
@@ -39,22 +40,20 @@ $projectTaskInfo = getAllTaskInfo();
                     </ul>
                 </td>
                 <td width="70%">
-                    <h3>All current tasks:</h3>
+
+                    <input type="text" name="project_name" id="project_name" placeholder="write project name here" value="" /> <input type="button" name="search" value="Search" onclick="search()" /><br>
+                    Search for: <div id="showproject" onkeyup="showHint(this.value)"></div> <p><span id="txthint"></span></p>
+                    
+                    <h3 >All current tasks:</h3>
+                    <div id="projects"> </div>
+                    <script src="../event(js)/viewproject.js"></script>
                      
-                    <?php
-                            for ($i = 0; $i < count($projectTaskInfo); $i++) { ?>
-                            
-                            Project Name: <?php echo $projectTaskInfo[$i]['project_name']; ?><br>
-                            Project Type: <?php echo $projectTaskInfo[$i]['project_type']; ?><br>
-                            Priority Task: <?php echo $projectTaskInfo[$i]['priority_task']; ?><br>
-                            Deadline: <?php echo $projectTaskInfo[$i]['deadline']; ?><br> <hr>
-                        <?php }?>
                 </td>
             </tr>
             <tr align="center">
                 <td colspan="2">Copyright c 2023</td>
             </tr>
         </table>
-    </form>
+    <!-- </form> -->
 </body>
 </html>

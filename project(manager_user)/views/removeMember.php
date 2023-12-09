@@ -44,8 +44,8 @@
         </div>
          <form action="../controller/removeMemberCheck.php" method="POST">
             <pre><p>
-            <b> Username:   <select name="addMemberId" id="">   
-                            <option>Select user</option>
+            <b> Username:   <select name="addMemberId" id="addMemberId">   
+                            <option disabled selected>Select user</option>
                             <?php for ($i=0;$i<count($memberInfo);$i++){?>
                             <option value="<?php echo $memberInfo[$i]['addMemberId']?>"><?php echo $memberInfo[$i]['username']?></option>  
                             <?php } ?>  

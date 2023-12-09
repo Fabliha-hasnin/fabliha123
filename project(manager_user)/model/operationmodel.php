@@ -74,6 +74,19 @@ function getAllTaskInfo() { // get deadline along with project name and type
     }
 }
 
+function searchProject($project_name) {
+    $con = getConnection();
+    $sql = "SELECT * FROM setpriority WHERE project_name = '$project_name'";
+    $result = mysqli_query($con, $sql);
+    $projectTaskInfo = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $projectTaskInfo[] = $row;
+    }
+
+    return $projectTaskInfo;
+}
+
 
 function insertTaskPriority($projectName, $projectType, $priorityTask, $deadline)
 {
@@ -111,19 +124,68 @@ function updateDeadline($projectName , $newdeadline )
         return $users;
     }
 
-    function addMember($username, $role)
+    function isMemberAdded($username)
+{
+    $con = getConnection();
+    $sql = "SELECT * FROM addmember WHERE username='{$username}'";
+    $result = mysqli_query($con, $sql);
+    $count = mysqli_num_rows($result);
+    if ($count == 1) {
+        return true; // Member already added
+    } else {
+        return false; // Member not added
+    }
+}
+
+function addMember($username, $role)
+{
+    $con = getConnection();
+    
+    if (isMemberAdded($username)) {
+        return false; // Member already added
+    }
+
+    $insert_query = "INSERT INTO addmember (username, role) VALUES ('$username', '$role')";
+    $result = mysqli_query($con, $insert_query);
+
+    return $result;
+}
+
+function aaddMember($username)
+{
+    // $con = getConnection();
+
+    // // Check if the member with the same username already exists
+    // $check_query = "SELECT * FROM addmember WHERE username = '$username'";
+    // $check_result = mysqli_query($con, $check_query);
+
+    // if (mysqli_num_rows($check_result) > 0) {
+    //     // Member with the same username already exists
+    //     return "Member with the username '$username' is already added.";
+    // }
+
+    // // If not, proceed to add the member
+    // $insert_query = "INSERT INTO addmember (username, role ) VALUES ('$username', '$role')";
+    // $result = mysqli_query($con, $insert_query);
+
+    // if ($result) {
+    //     return true;
+    // } else {
+    //     return false;
+    // }
     {
         $con = getConnection();
-        $insert_query = "INSERT INTO addmember (username, role ) VALUES ('$username', '$role')";
-        $result = mysqli_query($con, $insert_query);
-        if ($result)
-        {
+        $sql = "SELECT * FROM addmember where username='{$username}'";
+        $result = mysqli_query($con, $sql);
+        $count = mysqli_num_rows($result);
+        if ($count == 1) {
+            return false;
+        } else {
             return true;
         }
-        else{
-            return false;
-        }
     }
+}
+
 
     function getAllTeamMember()
     {
@@ -192,6 +254,56 @@ function getDevelopers(){
     }
     return $users;
 }
+
+function newDeveloper($developer_name){
+
+    $con = getConnection();
+    $sql = "SELECT * FROM developers WHERE developer_name = '$developer_name'";
+    $result = mysqli_query($con, $sql);
+    $users = [];
+    
+    while($user = mysqli_fetch_assoc($result)){
+        array_push($users, $user);
+    }
+    return $users;
+}
+function checkDeveloper($developer_name)
+{
+    $con = getConnection();
+
+    // Check if the developer with the same name exists
+    $check_query = "SELECT * FROM developers WHERE developer_name = '$developer_name'";
+    $check_result = mysqli_query($con, $check_query);
+
+    if (mysqli_num_rows($check_result) > 0) {
+        // Developer with the same name exists, remove from developers table
+        $delete_query = "DELETE FROM developers WHERE developer_name = '$developer_name'";
+        $delete_result = mysqli_query($con, $delete_query);
+
+        if (!$delete_result) {
+            return false; // Deletion failed
+        }
+
+        // Proceed to add the member to addmember table
+        $insert_query = "INSERT INTO addmember (username, role) VALUES ('$username', 'developer')";
+        $insert_result = mysqli_query($con, $insert_query);
+
+        return $insert_result;
+    }
+
+    return true; // Developer found and processed
+}
+
+function isValidPassword($password)
+{
+    $con = getConnection();
+    $sql = "SELECT password FROM userinfo WHERE password = '$password'";
+    $result = mysqli_query($con, $sql);
+
+    return $result && mysqli_num_rows($result) > 0;
+}
+
+
 
 
  ?>  

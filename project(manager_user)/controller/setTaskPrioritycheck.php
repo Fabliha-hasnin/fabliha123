@@ -26,9 +26,10 @@ if (isset($_POST['insert_project'])) {
         $inserted = insertTaskPriority($projectName, $projectType, $priorityTask, $deadline);
 
         if ($inserted) {
-            echo "Task priority and deadline inserted successfully";
+            header('Location: ../views/setTaskPriority.php');
         } else {
-            echo "Error: Failed to insert task priority";
+           // echo "Error: Failed to insert task priority";
+           return false;
         }
     }
 }
