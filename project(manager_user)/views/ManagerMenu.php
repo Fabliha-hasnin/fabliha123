@@ -7,7 +7,7 @@ if (isset($_SESSION['flag'])) {
     <html lang="en">
     <head>
         <title>Menu</title>
-        <link rel="stylesheet" href="../event(js)/managerMenu.css" />
+        <link rel="stylesheet" href="../event(js)/managerCSS/managerMenu.css" />
     </head>
 
     <body>

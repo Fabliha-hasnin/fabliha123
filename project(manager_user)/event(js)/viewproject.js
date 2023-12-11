@@ -1,3 +1,4 @@
+//search button feature
 function search() {
     let project_name = document.getElementById('project_name').value;
     let xhttp = new XMLHttpRequest();
@@ -13,6 +14,7 @@ function search() {
     xhttp.send("pname=" + project_name);
 }
 
+//show all projects under all current task
 function showProjects() {
     let xhttp = new XMLHttpRequest();
 
@@ -23,10 +25,8 @@ function showProjects() {
             document.getElementById("projects").innerHTML = this.responseText;
         }
     };
-
     xhttp.send();
 }
-
 // Call the show function on page load
 window.onload = function () {
     showProjects();

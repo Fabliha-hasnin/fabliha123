@@ -46,11 +46,11 @@
         
             <!-- <p> -->
 
-            <b> Users: <div id='users'></div><br>
+            <!-- <b> Users: <div id='users'></div><br> -->
            <!-- <b> Users: <div id='users' onchange="getDeveloper(this.value)"></div><br>
            <button onclick="show()">Show</button><br><br>
            <hr> -->
-           <script src="../event(js)/addmembercheck.js"></script>
+           <!-- <script src="../event(js)/addmembercheck.js"></script> -->
 
            <form action="../controller/addMemberCheck.php" method="POST" onsubmit="return getmember()">           
             <b>Username:    <select name="username" id="username" onblur="return getUser()"> 

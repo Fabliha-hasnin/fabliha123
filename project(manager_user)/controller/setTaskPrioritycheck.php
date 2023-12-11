@@ -9,31 +9,27 @@ if (isset($_GET['q'])) {
     echo $suggestionsJson;
 }
 
-if (isset($_POST['insert_project'])) {
+if (isset($_POST['project_name']) && isset($_POST['project_type']) && isset($_POST['priority_task']) && isset($_POST['deadline'])) {
+    $projectName = $_POST['project_name'];
+    $projectType = $_POST['project_type'];
     $priorityTask = $_POST['priority_task'];
     $deadline = $_POST['deadline'];
 
     $alph = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    if ($priorityTask == '' || $deadline == '') {
-        echo "Null value! Fill all the fields";
+    if ($projectName === '' || $projectType === '' || $priorityTask == '' || $deadline == '') {
+        echo json_encode(["error" => "Null value! Fill all the fields"]);
     } else if (strpbrk($priorityTask, $alph) === false) {
-        echo "Task priority should contain only alphabetic characters with a mix of upper and lower case";
+        echo json_encode(["error" => "Task priority should contain only alphabetic characters with a mix of upper and lower case"]);
     } else {
-        $projectName = $_POST['project_name'];
-        $projectType = $_POST['project_type'];
-
-        $inserted = insertTaskPriority($projectName, $projectType, $priorityTask, $deadline);
+        $username = $_SESSION['user']['username'];
+        $inserted = insertTaskPriority($username, $projectName, $projectType, $priorityTask, $deadline);
 
         if ($inserted) {
-            header('Location: ../views/setTaskPriority.php');
+            echo json_encode(["success" => true]);
         } else {
-           // echo "Error: Failed to insert task priority";
-           return false;
+            echo json_encode(["error" => "Error: Failed to insert task priority"]);
         }
     }
 }
 ?>
-
-
-

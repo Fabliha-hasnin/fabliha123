@@ -1,6 +1,9 @@
 <?php
-     include('../controller/setTaskPrioritycheck.php');
-     //$userSession = $_SESSION['user']['username'];
+     require_once('../controller/sessioncheck.php');
+     require_once('../model/operationmodel.php');
+     $userSession = $_SESSION['user']['username'];
+     $projectNames = getProjectName($userSession);
+     $projectTypes = getProjectType($userSession);
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,17 +42,15 @@
           <li> <a href="./changepass.php"> Change password </a> </li>
                 </td>
 
-                <form method="POST" action="../controller/setTaskPrioritycheck.php" onsubmit="return getpriority()" >
+                <form method="POST" action="../controller/setTaskPrioritycheck.php" onsubmit="return getPriority();">
                 <td width="70%">
                     <div>
                         <h2>Set Task Priority</h2>
                     </div>
                     <h3>All current tasks:</h3>
-
-                    <?php  $projects = displayAllProjectInfo(); ?>
-                    <?php  $projectNames = getProjectName();
-                           $projectTypes = getProjectType();
-                        ?> <hr>
+                       <div id= projects ></div>
+                       <!-- <script src="../event(js)/setprioritycheck.js"></script> -->
+                    <hr>
 
                     <select name="project_name" id="project_name">
                         <option value="" disabled selected>Select Project Name</option>

@@ -1,13 +1,13 @@
 <?php
 require_once('db.php');
 
-function displayAllProjectInfo() // Fetch all project information
+function displayAllProjectInfo($username) // Fetch all project information
 {
     $con = getConnection();
     $sql = "SELECT am.projectName, am.projectType, am.projectDetails
     FROM adminproject AS am
     JOIN assignmanager AS p ON p.projectId = am.projectId
-    WHERE p.username = 'Fabliha'";
+    WHERE p.username = '$username'";
     $result = mysqli_query($con, $sql);
     $projects = [];
 
@@ -24,13 +24,13 @@ function displayAllProjectInfo() // Fetch all project information
     }
 }
 
-function getProjectName() // Fetch project names for dropdown
+function getProjectName($username) // Fetch project names for dropdown
 {
     $con = getConnection();
     $sql = "SELECT am.projectName, am.projectType, am.projectDetails
     FROM adminproject AS am
     JOIN assignmanager AS p ON p.projectId = am.projectId
-    WHERE p.username = 'Fabliha'";
+    WHERE p.username = '$username'";
     $result = mysqli_query($con, $sql);
     $projectNames = [];
 
@@ -40,12 +40,12 @@ function getProjectName() // Fetch project names for dropdown
     return $projectNames;
 }
 
-function getProjectType() { // Fetch project types for dropdown
+function getProjectType($username) { // Fetch project types for dropdown
     $con = getConnection();
     $sql = "SELECT am.projectName, am.projectType, am.projectDetails
     FROM adminproject AS am
     JOIN assignmanager AS p ON p.projectId = am.projectId
-    WHERE p.username = 'Fabliha'";
+    WHERE p.username = '$username'";
     $result = mysqli_query($con, $sql);
     $projectTypes = [];
 
@@ -88,20 +88,62 @@ function searchProject($project_name) {
 }
 
 
-function insertTaskPriority($projectName, $projectType, $priorityTask, $deadline)
+function insertTaskPriority($username,$projectName, $projectType, $priorityTask, $deadline)
 {
+    // $con = getConnection();
+    // $insert_query = "INSERT INTO setpriority (assignManID, project_name, project_type, priority_task, deadline)
+    //                 VALUES ('$projectName', '$projectType', '$priorityTask', '$deadline')";
+    // $result = mysqli_query($con, $insert_query);
+
+    // return $result;
+
     $con = getConnection();
-    $insert_query = "INSERT INTO setpriority (project_name, project_type, priority_task, deadline)
-                    VALUES ('$projectName', '$projectType', '$priorityTask', '$deadline')";
+
+    // Fetch the necessary data from adminproject and assignmanager based on username
+    $select_query = "SELECT p.assignManID, am.projectName, am.projectType, am.projectDetails
+                    FROM adminproject AS am
+                    JOIN assignmanager AS p ON p.projectId = am.projectId
+                    WHERE p.username = '$username'";
+
+    $result = mysqli_query($con, $select_query);
+
+    // Check if the query executed successfully
+    if (!$result) {
+        echo "Error: " . mysqli_error($con);
+        return false;
+    }
+
+    // Fetch the row
+    $row = mysqli_fetch_assoc($result);
+
+    // Check if the row was fetched
+    if (!$row) {
+        echo "Error: No project details found for the given username.";
+        return false;
+    }
+
+    // Extract the data from the fetched row
+    $assignManID = $row['assignManID'];
+
+    // Insert into setpriority table
+    $insert_query = "INSERT INTO setpriority (assignManID, project_name, project_type, priority_task, deadline)
+                     VALUES ('$assignManID', '$projectName', '$projectType', '$priorityTask', '$deadline')";
+
     $result = mysqli_query($con, $insert_query);
 
-    return $result;
+    // Check if the insertion was successful
+    if ($result) {
+        return true;
+    } else {
+        echo "Error: " . mysqli_error($con);
+        return false;
+    }
 }
 
-function updateDeadline($projectName , $newdeadline )
+function updateDeadline($projectName ,$newDeadline)
 {
     $con = getConnection();
-    $sql = "UPDATE setpriority SET deadline = '$newdeadline' WHERE project_name = '$projectName'";
+    $sql = "UPDATE setpriority SET deadline = '$newDeadline' WHERE project_name = '$projectName'";
     $result = mysqli_query($con, $sql);
     if ($result)
         {
@@ -184,6 +226,19 @@ function aaddMember($username)
             return true;
         }
     }
+}
+
+function getaddedmember($username) {
+    $con = getConnection();
+    $sql = "SELECT * FROM addmember WHERE username = '$username'";
+    $result = mysqli_query($con, $sql);
+    $addedmember = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $addedmember[] = $row;
+    }
+
+    return $addedmember;
 }
 
 
@@ -304,7 +359,28 @@ function isValidPassword($password)
 }
 
 
+function getTaskPrioritiesByUsername($username) {
+    $con = getConnection();
 
+    $query = "SELECT sp.project_name, sp.project_type, sp.priority_task, sp.deadline
+              FROM setpriority sp
+              JOIN assignmanager am ON sp.assignManID = am.assignManID
+              WHERE am.username = '$username'";
+
+    $result = mysqli_query($con, $query);
+
+    if (!$result) {
+        echo "Error: " . mysqli_error($con);
+        return false;
+    }
+
+    $tasks = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $tasks[] = $row;
+    }
+
+    return $tasks;
+}
 
  ?>  
 

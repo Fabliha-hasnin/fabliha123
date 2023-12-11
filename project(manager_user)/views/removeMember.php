@@ -4,20 +4,26 @@
     $developerInfo = getDeveloperInfo();
     $memberInfo = getAllTeamMember();
 ?>
+
 <html lang="en">
 <head>
     <title>Document</title>
-    <script src = "../event(js)/removemembercheck.js"></script>
+    <script src="../event(js)/removemembercheck.js"></script>
     <style>  
-    td { vertical-align:top;}
-   </style>
+        td { vertical-align: top; }
+    </style>
 </head>
-<body>
-<table border = "1" align="center" width="70%" height="100%">
-<tr> <th colspan="2"> <bold><h1> Collaborative task management </h1></bold> <a href="../controller/logout.php"> Logout </a></th></tr>
-     <tr>
-     <td width="30%">
-         Accounts
+<body onload="showAddedMembers()">
+    <table border="1" align="center" width="70%" height="100%">
+        <tr>
+            <th colspan="2">
+                <bold><h1> Collaborative task management </h1></bold>
+                <a href="../controller/logout.php"> Logout </a>
+            </th>
+        </tr>
+        <tr>
+            <td width="30%">
+            Accounts
          <hr></hr>
          <ul>
           <li> <a href="./managerDashboard.php"> Dasboard </a> </li>
@@ -37,38 +43,31 @@
           <li> <a href="./changepass.php"> Change password </a> </li>
          </ul>
      </td>
-
-        <td width="70%">
-        <div>
-        <center> <h2> Remove Member </h2> </center> 
-        </div>
-         <form action="../controller/removeMemberCheck.php" method="POST">
-            <pre><p>
-            <b> Username:   <select name="addMemberId" id="addMemberId">   
-                            <option disabled selected>Select user</option>
-                            <?php for ($i=0;$i<count($memberInfo);$i++){?>
-                            <option value="<?php echo $memberInfo[$i]['addMemberId']?>"><?php echo $memberInfo[$i]['username']?></option>  
-                            <?php } ?>  
-                            </select>
-                            <br>
-            <b> Password    :</b>  <input type="password" id ="password" name="password" value="" /> <br> <br>
-            <input type="reset" name="" value="cancel" /> <input type="submit" name="" value="Remove" onclick="remove()" /> 
-            <p></pre>
-
-            </form>
-        
-        <h4> <u> Added Members </u></h4>
-           
-        <input type="button" name="click" value="Show members" onclick="showMembers()"/><br><br>
-        <div id="members"></div>
             </td>
-    </tr>
-    <tr align="center">
-        <td colspan="2"> Copyright c 2023 </td>
-    </tr>
-</body>
-</html>
+            <td width="70%">
+            <div>
+                    <center> <h2> Remove Member </h2> </center> 
+                    <b>Username:</b> <input type="text" name="username" id="username" value="" />
+                    <input type="button" name="search" value="Search" onclick="searchToRemove()" />
+                    <hr>
+                    <div id="h1"></div>
+                    <hr>
+                <center>
+                    <form action="../controller/removeMemberCheck.php" onsubmit="return remove()" method="POST">
+                    </form>
+                </center>
+        
+                <h4> <u> Added Members </u></h4>
+                <center>
+                <!-- <input type="button" name="click" value="Show members" onclick="showMembers()" /><br><br>
+                <div id="members"></div> -->
+                <div id="membersToShow"></div>
+                </center>
+            </td>
+        </tr>
+        <tr align="center">
+            <td colspan="2"> Copyright c 2023 </td>
+        </tr>
     </table>
 </body>
 </html>
-

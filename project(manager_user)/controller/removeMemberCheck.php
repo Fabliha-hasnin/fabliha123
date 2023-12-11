@@ -42,4 +42,3 @@ if ($result) {
     echo "Remove member unsuccessful";
 }
 ?>
-

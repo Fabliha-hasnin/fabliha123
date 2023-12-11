@@ -1,12 +1,16 @@
 <?php
+//include('../controller/updateDeadlinecheck.php');
+require_once('../controller/sessioncheck.php');
 require_once('../model/operationmodel.php');
 //print_r(getAllTaskInfo());
-$projectTaskInfo = getAllTaskInfo();
+$userSession = $_SESSION['user']['username'];
+$projectTaskInfo = getTaskPrioritiesByUsername($userSession);
 
 ?>
 <html lang="en">
 <head>
-    <title>Document</title>
+    <title>Collaborative task management</title>
+    <script src="../event(js)/updateDeadline.js"></script>
     <style>  
     td { vertical-align:top;}
    </style>
@@ -39,30 +43,43 @@ $projectTaskInfo = getAllTaskInfo();
 
         <td width="70%">
            
-        <form action="../controller/updateDeadlinecheck.php" method="POST" enctype="">
+        <form action="../controller/updateDeadlinecheck.php" method="POST" onsubmit="return updateDeadline()" enctype="">
     <div>
         <center> <h2> Update Task Deadline </h2> </center> 
     </div>
 
    <h3> All current tasks : </h3>
 
-                        <?php
-                            for ($i = 0; $i < count($projectTaskInfo); $i++) { ?>
-                            
-                            Project Name: <?php echo $projectTaskInfo[$i]['project_name']; ?><br>
-                            Project Type: <?php echo $projectTaskInfo[$i]['project_type']; ?><br>
-                            Priority Task: <?php echo $projectTaskInfo[$i]['priority_task']; ?><br>
-                            Deadline: <?php echo $projectTaskInfo[$i]['deadline']; ?><br> <hr>
-                        <?php }?>
+   <table border="1">
+    <tr>
+        <th>Project Name</th>
+        <th>Project Type</th>
+        <th>Priority Task</th>
+        <th>Deadline</th>
+    </tr>
+
+    <?php
+    for ($i = 0; $i < count($projectTaskInfo); $i++) {
+    ?>
+        <tr>
+            <td><?php echo $projectTaskInfo[$i]['project_name']; ?></td>
+            <td><?php echo $projectTaskInfo[$i]['project_type']; ?></td>
+            <td><?php echo $projectTaskInfo[$i]['priority_task']; ?></td>
+            <td><?php echo $projectTaskInfo[$i]['deadline']; ?></td>
+            </tr>
+    <?php
+    }
+    ?>
+</table>
                         
-                        <select name="project_name">
+                        <select name="project_name" id="project_name">
                             <option value="">Select Project Name</option>
                             <?php for ($i = 0; $i < count($projectTaskInfo); $i++) { ?>
                                 <option value="<?php echo $projectTaskInfo[$i]['project_name']; ?>"><?php echo $projectTaskInfo[$i]['project_name']; ?></option>
                             <?php } ?>
                         </select>
 
-                        <b>Set Deadline:</b> <input type="date" name="deadline" value="" /><br><br>
+                        <b>Set Deadline:</b> <input type="date" name="deadline" id="deadline" value="" /><p><span id="h1" style="color:red"><span></p><br><br>
                         <input type="reset" name="" value="Reset" /> 
                         <input type="submit" name="submit" value="Update" />
 

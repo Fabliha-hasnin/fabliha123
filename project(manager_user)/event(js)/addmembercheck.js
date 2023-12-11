@@ -63,22 +63,22 @@ function getUser(){
 
 
 // Function to display developers on page load
-function show() {
-    let xhttp = new XMLHttpRequest();
+// function show() {
+//     let xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "../controller/showDevelopers.php", true);
+//     xhttp.open("GET", "../controller/showDevelopers.php", true);
 
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("users").innerHTML = this.responseText;
-        }
-    };
+//     xhttp.onreadystatechange = function () {
+//         if (this.readyState == 4 && this.status == 200) {
+//             document.getElementById("users").innerHTML = this.responseText;
+//         }
+//     };
 
-    xhttp.send();
-}
+//     xhttp.send();
+// }
 
-// Call the show function on page load
-window.onload = function () {
-    show();
-};
+// // Call the show function on page load
+// window.onload = function () {
+//     show();
+// };
 
